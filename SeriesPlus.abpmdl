@@ -1,0 +1,85 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.Account": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "SeriesPlus.Application": {
+      "path": "src/SeriesPlus.Application/SeriesPlus.Application.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.Application.Tests": {
+      "path": "test/SeriesPlus.Application.Tests/SeriesPlus.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "SeriesPlus.Domain.Shared": {
+      "path": "src/SeriesPlus.Domain.Shared/SeriesPlus.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.Application.Contracts": {
+      "path": "src/SeriesPlus.Application.Contracts/SeriesPlus.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.HttpApi": {
+      "path": "src/SeriesPlus.HttpApi/SeriesPlus.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.HttpApi.Client": {
+      "path": "src/SeriesPlus.HttpApi.Client/SeriesPlus.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.EntityFrameworkCore.Tests": {
+      "path": "test/SeriesPlus.EntityFrameworkCore.Tests/SeriesPlus.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "SeriesPlus.EntityFrameworkCore": {
+      "path": "src/SeriesPlus.EntityFrameworkCore/SeriesPlus.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.TestBase": {
+      "path": "test/SeriesPlus.TestBase/SeriesPlus.TestBase.abppkg",
+      "folder": "test"
+    },
+    "SeriesPlus.Domain.Tests": {
+      "path": "test/SeriesPlus.Domain.Tests/SeriesPlus.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "SeriesPlus.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/SeriesPlus.HttpApi.Client.ConsoleTestApp/SeriesPlus.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "SeriesPlus.DbMigrator": {
+      "path": "src/SeriesPlus.DbMigrator/SeriesPlus.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.HttpApi.Host": {
+      "path": "src/SeriesPlus.HttpApi.Host/SeriesPlus.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "SeriesPlus.Domain": {
+      "path": "src/SeriesPlus.Domain/SeriesPlus.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
