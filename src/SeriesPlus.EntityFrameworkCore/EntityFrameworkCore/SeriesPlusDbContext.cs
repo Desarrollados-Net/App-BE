@@ -14,6 +14,9 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using SeriesPlus.Series;                              //agregue esto para q se compile
+//using SeriesPlus.Domain.Series; // esto no funciono
+
 
 namespace SeriesPlus.EntityFrameworkCore;
 
@@ -25,8 +28,9 @@ public class SeriesPlusDbContext :
     ITenantManagementDbContext,
     IIdentityDbContext
 {
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
-
+    /* Add DbSet properties for your Aggregate Roots / Entities here. 
+     (apartir de Aqui debo agregar los Agreggate root) */
+    public DbSet<Serie> Series { get; set;}
 
     #region Entities from the modules
 
@@ -68,6 +72,23 @@ public class SeriesPlusDbContext :
         base.OnModelCreating(builder);
 
         /* Include modules to your migration db context */
+        builder.Entity<Serie>(b =>
+        {
+            b.ToTable(SeriesPlusConsts.DbTablePrefix + "Series",
+                SeriesPlusConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Titulo).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Genero).IsRequired().HasMaxLength(128);
+            b.Property(x => x.FechaLanzamiento).IsRequired(); //no se restringe xq es unafecha 
+            b.Property(x => x.Duracion).IsRequired().HasMaxLength(128);//no hace falta restrin. xq puede tomar cualq.valor Num.
+            b.Property(x => x.FotoPortada).HasMaxLength(256); //ruta
+            b.Property(x => x.PaisOrigen).IsRequired().HasMaxLength(64);
+            b.Property(x => x.CalificacionIMBD).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Director).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Escritor).HasMaxLength(128);
+            b.Property(x => x.Actores).HasMaxLength(256);
+         //   b.Property(x => x.If_Emision).IsRequired();//un boolean no hace falta restringir(2 valores posib.)
+        }); 
 
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
