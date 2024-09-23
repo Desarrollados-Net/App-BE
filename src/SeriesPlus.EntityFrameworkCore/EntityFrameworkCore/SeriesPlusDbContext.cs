@@ -14,7 +14,8 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using SeriesPlus.Series;                              //agregue esto para q se compile
+using SeriesPlus.Series;
+using SeriesPlus.WatchLists;                              //agregue esto para q se compile
 //using SeriesPlus.Domain.Series; // esto no funciono
 
 
@@ -31,6 +32,7 @@ public class SeriesPlusDbContext :
     /* Add DbSet properties for your Aggregate Roots / Entities here. 
      (apartir de Aqui debo agregar los Agreggate root) */
     public DbSet<Serie> Series { get; set;}
+    public DbSet<WatchList> WatchLists{ get; set; }
 
     #region Entities from the modules
 
@@ -68,7 +70,7 @@ public class SeriesPlusDbContext :
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
-    {
+    { 
         base.OnModelCreating(builder);
 
         /* Include modules to your migration db context */
@@ -88,7 +90,14 @@ public class SeriesPlusDbContext :
             b.Property(x => x.Escritor).HasMaxLength(128);
             b.Property(x => x.Actores).HasMaxLength(256);
          //   b.Property(x => x.If_Emision).IsRequired();//un boolean no hace falta restringir(2 valores posib.)
-        }); 
+        });
+
+        builder.Entity<WatchList>(b =>
+        {
+            b.ToTable(SeriesPlusConsts.DbTablePrefix + "WatchList",
+                SeriesPlusConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
 
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
