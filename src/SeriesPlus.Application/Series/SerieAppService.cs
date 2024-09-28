@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;//con ctrl + .
-using Volo.Abp.Application.Services; //con ctrl + .
-//using Volo.Abp.Application.Dtos;//agregue 
-//using Volo.Abp.Application.Services;//agregue
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
 namespace SeriesPlus.Series
 {
     public class SerieAppService : CrudAppService <Serie,SerieDto, int, PagedAndSortedResultRequestDto, CreateUpdateSerieDto, CreateUpdateSerieDto>, ISerieAppService
     {
-        public SerieAppService(IRepository<Serie, int> repository) :base(repository)//defino el constructor
+        private readonly ISeriesApiService _seriesService;
+        public SerieAppService(IRepository<Serie, int> repository, ISeriesApiService seriesService) : base(repository)
         {
+            _seriesService = seriesService;
+        }
+        public async Task<ICollection<SerieDto>> SearchAsync(string titulo, string genero)
+        {
+            return await _seriesService.GetSeriesAsync(titulo, genero);
         }
     }
 }

@@ -6,6 +6,8 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Modularity;
 using Volo.Abp.TenantManagement;
+using Microsoft.Extensions.DependencyInjection;
+using SeriesPlus.Series;
 
 namespace SeriesPlus;
 
@@ -27,5 +29,7 @@ public class SeriesPlusApplicationModule : AbpModule
         {
             options.AddMaps<SeriesPlusApplicationModule>();
         });
+
+        context.Services.AddTransient<ISeriesApiService, OmdbService>();
     }
 }
