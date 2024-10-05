@@ -84,6 +84,7 @@ public class SeriesPlusDbContext :
             b.Property(x => x.FechaLanzamiento).IsRequired(); //no se restringe xq es unafecha 
             b.Property(x => x.Duracion).IsRequired().HasMaxLength(128);//no hace falta restrin. xq puede tomar cualq.valor Num.
             b.Property(x => x.FotoPortada).HasMaxLength(256); //ruta
+            b.Property(x => x.Idioma).IsRequired().HasMaxLength(256);
             b.Property(x => x.PaisOrigen).IsRequired().HasMaxLength(64);
             b.Property(x => x.CalificacionIMBD).IsRequired().HasMaxLength(128);
             b.Property(x => x.Director).IsRequired().HasMaxLength(128);

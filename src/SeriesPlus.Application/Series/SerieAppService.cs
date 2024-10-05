@@ -15,9 +15,9 @@ namespace SeriesPlus.Series
         {
             _seriesService = seriesService;
         }
-        public async Task<ICollection<SerieDto>> SearchAsync(string titulo, string genero)
+        public async Task<ICollection<SerieDto>> SearchAsync(string Titulo, string Genero)
         {
-            return await _seriesService.GetSeriesAsync(titulo, genero);
+            return await _seriesService.GetSeriesAsync(Titulo, Genero);
         }
     }
 }
