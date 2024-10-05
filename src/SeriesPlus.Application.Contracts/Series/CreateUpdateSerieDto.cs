@@ -13,6 +13,7 @@ namespace SeriesPlus.Series
         public DateTime FechaLanzamiento { get; set; }
         public string Duracion { get; set; }
         public string FotoPortada { get; set; } // Considerar la ruta o el tipo de dato según la implementación de 'image'
+        public string Idioma { get; set; }
         public string PaisOrigen { get; set; }
         public string CalificacionIMBD { get; set; }
         public string Director { get; set; }
