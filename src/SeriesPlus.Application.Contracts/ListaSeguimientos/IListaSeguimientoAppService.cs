@@ -8,7 +8,7 @@ using Volo.Abp.Application.Services;
 
 namespace SeriesPlus.ListaSeguimientos
 {
-    public interface ListaSeguimientoAppService : IApplicationService
+    public interface IListaSeguimientoAppService : IApplicationService
     {
         Task AddSerieAsync(int serieId);//definimos una operacion de sistema q va a estar relacionada con una Entidad serie
     }                                   //aqui definio el comportamiento del metodo para agregar una serie a la listaSeg. 

@@ -32,7 +32,7 @@ public class SeriesPlusDbContext :
     /* Add DbSet properties for your Aggregate Roots / Entities here. 
      (apartir de Aqui debo agregar los Agreggate root) */
     public DbSet<Serie> Series { get; set;}
-    public DbSet<ListaSeguimiento> WatchLists{ get; set; }
+    public DbSet<ListaSeguimiento> ListaSeguimientos{ get; set; }
 
     #region Entities from the modules
 
@@ -84,6 +84,7 @@ public class SeriesPlusDbContext :
             b.Property(x => x.FechaLanzamiento).IsRequired(); //no se restringe xq es unafecha 
             b.Property(x => x.Duracion).IsRequired().HasMaxLength(128);//no hace falta restrin. xq puede tomar cualq.valor Num.
             b.Property(x => x.FotoPortada).HasMaxLength(256); //ruta
+            b.Property(x => x.Idioma).IsRequired().HasMaxLength(128);
             b.Property(x => x.PaisOrigen).IsRequired().HasMaxLength(64);
             b.Property(x => x.CalificacionIMBD).IsRequired().HasMaxLength(128);
             b.Property(x => x.Director).IsRequired().HasMaxLength(128);
@@ -94,7 +95,7 @@ public class SeriesPlusDbContext :
 
         builder.Entity<ListaSeguimiento>(b =>
         {
-            b.ToTable(SeriesPlusConsts.DbTablePrefix + "WatchList",
+            b.ToTable(SeriesPlusConsts.DbTablePrefix + "ListaSeguimiento",
                 SeriesPlusConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });

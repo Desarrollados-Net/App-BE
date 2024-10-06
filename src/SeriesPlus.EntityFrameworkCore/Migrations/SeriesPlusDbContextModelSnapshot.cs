@@ -24,6 +24,31 @@ namespace SeriesPlus.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SeriesPlus.ListaSeguimientos.ListaSeguimiento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppListaSeguimiento", (string)null);
+                });
+
             modelBuilder.Entity("SeriesPlus.Series.Serie", b =>
                 {
                     b.Property<int>("Id")
@@ -84,8 +109,11 @@ namespace SeriesPlus.Migrations
 
                     b.Property<string>("Idioma")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int?>("ListaSeguimientoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PaisOrigen")
                         .IsRequired()
@@ -97,39 +125,11 @@ namespace SeriesPlus.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<int?>("WatchListId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("WatchListId");
+                    b.HasIndex("ListaSeguimientoId");
 
                     b.ToTable("AppSeries", (string)null);
-                });
-
-            modelBuilder.Entity("SeriesPlus.WatchLists.WatchList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppWatchList", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -2007,9 +2007,9 @@ namespace SeriesPlus.Migrations
 
             modelBuilder.Entity("SeriesPlus.Series.Serie", b =>
                 {
-                    b.HasOne("SeriesPlus.WatchLists.WatchList", null)
+                    b.HasOne("SeriesPlus.ListaSeguimientos.ListaSeguimiento", null)
                         .WithMany("Series")
-                        .HasForeignKey("WatchListId");
+                        .HasForeignKey("ListaSeguimientoId");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
@@ -2163,7 +2163,7 @@ namespace SeriesPlus.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SeriesPlus.WatchLists.WatchList", b =>
+            modelBuilder.Entity("SeriesPlus.ListaSeguimientos.ListaSeguimiento", b =>
                 {
                     b.Navigation("Series");
                 });
