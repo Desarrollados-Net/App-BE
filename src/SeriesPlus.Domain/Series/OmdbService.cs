@@ -18,7 +18,7 @@ namespace SeriesPlus.Series
         private static readonly string apiKey = "39e61792"; // Reemplaza con tu clave API de OMDb.
         private static readonly string baseUrl = "http://www.omdbapi.com/";
 
-        public async Task<ICollection<SerieDto>> GetSeriesAsync(string Titulo, string Genero)
+        public async Task<ICollection<SerieDto>> GetSeriesAsync(string Titulo) //string genero
         {
             using HttpClient client = new HttpClient();
             List<SerieDto> series = new List<SerieDto>();
@@ -32,6 +32,9 @@ namespace SeriesPlus.Series
                 response.EnsureSuccessStatusCode();
 
                 string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                // Imprimir la respuesta JSON para depurar
+                Console.WriteLine(jsonResponse); // Agrega esta línea (para ver/verificar datos q  de la api por consola)
 
                 // Deserializar la respuesta JSON a un objeto SearchResponse
                 var searchResponse = JsonConvert.DeserializeObject<SearchResponse>(jsonResponse);

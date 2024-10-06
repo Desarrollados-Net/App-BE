@@ -10,6 +10,6 @@ namespace SeriesPlus.Series
 {
     public interface ISerieAppService : ICrudAppService<SerieDto,int,PagedAndSortedResultRequestDto ,CreateUpdateSerieDto, CreateUpdateSerieDto> 
     {
-        Task<ICollection<SerieDto>> SearchAsync(string? Titulo, string? Genero); //El ? al final de string permite que el valor sea null
-    }
+        Task<ICollection<SerieDto>> SearchAsync(string? Titulo); //El ? al final de string permite que el valor sea null
+    }                                                     //, string? Genero
 }
