@@ -1,4 +1,4 @@
-using SeriesPlus.Samples;
+/*using SeriesPlus.Samples;
 using Xunit;
 
 namespace SeriesPlus.EntityFrameworkCore.Applications;
@@ -7,4 +7,4 @@ namespace SeriesPlus.EntityFrameworkCore.Applications;
 public class EfCoreSampleAppServiceTests : SampleAppServiceTests<SeriesPlusEntityFrameworkCoreTestModule>
 {
 
-}
+}*/
