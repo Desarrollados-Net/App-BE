@@ -22,6 +22,7 @@ namespace SeriesPlus.Series
         public string Escritor { get; set; }
         public string Actores { get; set; }
         public int TotalTemporadas { get; set; }
+        public int idSerie { get; set; }
         public ICollection<Temporada> Temporadas { get; set; }
 
         //public bool If_Emision { get; set; } // Para valores booleanos, como si está en emisión o no
