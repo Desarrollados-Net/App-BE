@@ -46,11 +46,11 @@ namespace SeriesPlus.Notificaciones
 
             await _notificacionRepository.InsertAsync(notificacion);
 
-            // Enviar la notificación utilizando los notificador(es) registrados
+            // Enviar la notificación utilizando los notificadores registrados
             var notificadoresFiltrados = _notificadores.Where(n => n.PuedeEnviar(tipo));
             foreach (var notificador in notificadoresFiltrados)
             {
-                await notificador.EnviarNotificacionAsync(notificacionDto); // Usar el DTO aquí
+                await notificador.EnviarNotificacionAsync(notificacionDto);
             }
         }
     }

@@ -16,5 +16,7 @@ namespace SeriesPlus.ListaSeguimientos
         {
             Series = new List<Serie>();
         }
+
+        public DateOnly FechaModificacion { get; set; }
     }
 }
