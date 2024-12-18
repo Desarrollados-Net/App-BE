@@ -86,7 +86,7 @@ public class SeriesPlusDbContext :
             b.Property(x => x.FotoPortada).HasMaxLength(256); //ruta
             b.Property(x => x.Idioma).IsRequired().HasMaxLength(128);
             b.Property(x => x.PaisOrigen).IsRequired().HasMaxLength(64);
-            b.Property(x => x.CalificacionIMBD).IsRequired().HasMaxLength(128);
+            b.Property(x => x.CalificacionIMDB).IsRequired().HasMaxLength(128);
             b.Property(x => x.Director).IsRequired().HasMaxLength(128);
             b.Property(x => x.Escritor).HasMaxLength(128);
             b.Property(x => x.Actores).HasMaxLength(256);
