@@ -16,12 +16,14 @@ namespace SeriesPlus.Series
         public string FotoPortada { get; set; } // Considerar la ruta o el tipo de dato según la implementación de 'image'
         public string Idioma { get; set; }
         public string PaisOrigen { get; set; }
-        public string CalificacionIMBD { get; set; }
+        public string CalificacionIMDB { get; set; }
         public string Director { get; set; }
         public string Escritor { get; set; }
         public string Actores { get; set; }
 
         public string ImdbID { get; set; }
         public int TotalTemporadas { get; set; }
+
+        public ICollection<TemporadaDto> Temporadas { get; set; }
     }
 }

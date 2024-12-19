@@ -5,6 +5,7 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using SeriesPlus.Series;
 using SeriesPlus.Notificaciones;
+using System.Collections.Generic;
 
 namespace SeriesPlus.Series
 {
@@ -133,6 +134,72 @@ namespace SeriesPlus.Series
                             }
                         }
                     }
+                }
+            }
+        }
+
+
+        // Método para persistir series en la base de datos
+        public async Task PersistirSeriesAsync(SerieDto[] seriesDto)
+        {
+            var seriesExistentes = await _serieRepository.GetListAsync(); // Obtener todas las series
+
+            foreach (var serieDto in seriesDto)
+            {
+                // Comprobación para evitar excepciones al acceder a propiedades de un objeto que podría ser null
+                if (serieDto == null) continue; // Salta si serieDto es null
+
+                var serieExistente = seriesExistentes.FirstOrDefault(s => s.ImdbID == serieDto.ImdbID);
+
+                if (serieExistente == null)
+                {
+                    // Crear nueva serie
+                    var nuevaSerie = new Serie
+                    {
+                        Titulo = serieDto.Titulo,
+                        Genero = serieDto.Genero,
+                        FechaLanzamiento = serieDto.FechaLanzamiento,
+                        Duracion = serieDto.Duracion,
+                        FotoPortada = serieDto.FotoPortada,
+                        Idioma = serieDto.Idioma,
+                        PaisOrigen = serieDto.PaisOrigen,
+                        CalificacionIMDB = serieDto.CalificacionIMDB,
+                        Director = serieDto.Director,
+                        Escritor = serieDto.Escritor,
+                        Actores = serieDto.Actores,
+                        ImdbID = serieDto.ImdbID,
+                        TotalTemporadas = serieDto.TotalTemporadas,
+                        Temporadas = new List<Temporada>() // Asegúrate de inicializar la colección
+                    };
+
+                    if (serieDto.Temporadas != null)
+                    {
+                        foreach (var temporadaDto in serieDto.Temporadas)
+                        {
+                            var nuevaTemporada = new Temporada
+                            {
+                                NumeroTemporada = temporadaDto.NumeroTemporada,
+                                Titulo = temporadaDto.Titulo,
+                                FechaLanzamiento = temporadaDto.FechaLanzamiento,
+                                Episodios = temporadaDto.Episodios.Select(e => new Episodio
+                                {
+                                    NumeroEpisodio = e.NumeroEpisodio,
+                                    Titulo = e.Titulo,
+                                    FechaEstreno = e.FechaEstreno
+                                }).ToList()
+                            };
+                            nuevaSerie.Temporadas.Add(nuevaTemporada);
+                        }
+                    }
+
+                    // Persistir la nueva serie en la base de datos
+                    await _serieRepository.InsertAsync(nuevaSerie);
+                }
+                else
+                {
+                    // Actualizar la serie existente con nueva información
+                    serieExistente.TotalTemporadas = serieDto.TotalTemporadas;
+                    await _serieRepository.UpdateAsync(serieExistente);
                 }
             }
         }

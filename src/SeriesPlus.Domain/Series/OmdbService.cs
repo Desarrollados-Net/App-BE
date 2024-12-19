@@ -192,7 +192,7 @@ namespace SeriesPlus.Series
                     Idioma = json["Language"]?.ToString(),
                     PaisOrigen = json["Country"]?.ToString(),
                     FotoPortada = json["Poster"]?.ToString(),
-                    CalificacionIMBD = json["imdbRating"]?.ToString(),
+                    CalificacionIMDB = json["imdbRating"]?.ToString(),
                     TotalTemporadas = int.TryParse(json["totalSeasons"]?.ToString(), out var seasons) ? seasons : 0
                 };
             }
@@ -234,7 +234,7 @@ namespace SeriesPlus.Series
                         Actores = serieOmdb.Actores,
                         FotoPortada = serieOmdb.FotoPortada,
                         PaisOrigen = serieOmdb.PaisOrigen,
-                        CalificacionIMBD = serieOmdb.CalificacionIMBD,
+                        CalificacionIMDB = serieOmdb.CalificacionIMDB,
                         Duracion = serieOmdb.Duracion,
                         Genero = serieOmdb.Genero,
                         Idioma = serieOmdb.Idioma
@@ -279,7 +279,7 @@ namespace SeriesPlus.Series
             public string PaisOrigen { get; set; }
 
             [JsonProperty("imdbRating")]
-            public string CalificacionIMBD { get; set; }
+            public string CalificacionIMDB { get; set; }
 
             [JsonProperty("Runtime")]
             public string Duracion { get; set; }
